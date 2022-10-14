@@ -2,15 +2,10 @@ package com.shop.WebShop.model;
 
 import java.util.Collection;
 
-//import java.util.Collection;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import io.jsonwebtoken.lang.Collections;
-//import org.springframework.security.core.userdetails.UserDetails;
-
-public class User implements UserDetails{
+public class User implements UserDetails {
 	private static final long serialVersionUID = 1L;
 	private int id;
 	private String username;

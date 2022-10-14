@@ -1,9 +1,58 @@
 package com.shop.WebShop.model;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Order {
 
+	public Order(int user_Id, String name, Date dateBook, Date dateReturn, String status, int quantity,
+			String address) {
+		super();
+		User_Id = user_Id;
+		Name = name;
+		DateBook = dateBook;
+		DateReturn = dateReturn;
+		Status = status;
+		Quantity = quantity;
+		Address = address;
+	}
+	public Order(int id, int user_Id, String name, Date dateBook, Date dateReturn, String status, int quantity,
+			String address) {
+		super();
+		Id = id;
+		User_Id = user_Id;
+		Name = name;
+		DateBook = dateBook;
+		DateReturn = dateReturn;
+		Status = status;
+		Quantity = quantity;
+		Address = address;
+	}
+	public Order(int id, int user_Id, String name, Date dateBook, Date dateReturn, String status, int quantity,
+			String address, List<OrderDetails> lstOrderDetails) {
+		super();
+		Id = id;
+		User_Id = user_Id;
+		Name = name;
+		DateBook = dateBook;
+		DateReturn = dateReturn;
+		Status = status;
+		Quantity = quantity;
+		Address = address;
+		this.lstOrderDetails = lstOrderDetails;
+	}
+	public Order(int user_Id, String name, Date dateBook, Date dateReturn, String status, int quantity, String address,
+			List<OrderDetails> lstOrderDetails) {
+		super();
+		User_Id = user_Id;
+		Name = name;
+		DateBook = dateBook;
+		DateReturn = dateReturn;
+		Status = status;
+		Quantity = quantity;
+		Address = address;
+		this.lstOrderDetails = lstOrderDetails;
+	}
 	public Order() {
 		// TODO Auto-generated constructor stub
 	}
@@ -15,6 +64,7 @@ public class Order {
     private String Status;
     private int Quantity;
     private String Address;
+    private List<OrderDetails>lstOrderDetails ;
 	public int getId() {
 		return Id;
 	}
@@ -62,6 +112,12 @@ public class Order {
 	}
 	public void setAddress(String address) {
 		Address = address;
+	}
+	public List<OrderDetails> getLstOrderDetails() {
+		return lstOrderDetails;
+	}
+	public void setLstOrderDetails(List<OrderDetails> lstOrderDetails) {
+		this.lstOrderDetails = lstOrderDetails;
 	}
 
 }

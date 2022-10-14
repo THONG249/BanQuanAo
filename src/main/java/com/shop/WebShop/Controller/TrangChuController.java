@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.shop.WebShop.Repository.HomeRepository;
 import com.shop.WebShop.model.Brand;
+import com.shop.WebShop.model.Category;
 import com.shop.WebShop.model.Product;
 import com.shop.WebShop.model.TrangChu;
 
@@ -28,13 +29,14 @@ public class TrangChuController {
 		
 		List<Brand> lstBrandModels = homeRepository.lstBrand();
 		List<Product> lstProductModels = homeRepository.lstProduct();
+		List<Category> lstCategories = homeRepository.lstCategories();
 		if(lstBrandModels != null && lstProductModels !=null) {
 			return ResponseEntity.status(HttpStatus.OK).body(
-					new TrangChu("Ok","Data is susscess",lstProductModels,lstBrandModels)
+					new TrangChu("Ok","Data is susscess",lstProductModels,lstBrandModels,lstCategories)
 					);
 		}else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-					new TrangChu("Not Found","Data is not exits", null, null)
+					new TrangChu("Not Found","Data is not exits", null, null,null)
 					);
 		}
 	}

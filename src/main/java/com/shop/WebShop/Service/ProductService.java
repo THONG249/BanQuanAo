@@ -1,6 +1,7 @@
 package com.shop.WebShop.Service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -14,6 +15,9 @@ public class ProductService implements ProductRepository{
 	@Override
 	public List<Product> products() {
 		// TODO Auto-generated method stub
+		//String sql = "select dboproduct.id, dboproduct.name as \"TenSanPham\",dbobrand.name as \"Brand\",dbocategory.name as \"Category\",dboproduct.price as \"Price\",dboproduct.image as \"image\",dboproduct.product_Description as \"Description\"from dboproduct inner join dbobrand on dboproduct.brand_id = dbobrand.id inner join dbocategory on dboproduct.category_id = dbocategory.id";
+		//return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Product.class));
+	
 		return jdbcTemplate.query("SELECT * from dboProduct", BeanPropertyRowMapper.newInstance(Product.class));
 	}
 	@Override
@@ -24,5 +28,16 @@ public class ProductService implements ProductRepository{
 				product.getBrand_Id(), product.getCategory_Id(), product.getProduct_Description(),product.getColor(),product.getProduct_Size(),
 				product.getQuantity(),product.getPrice(),product.getImage(),product.getName(),product.getMaterial()
 		});
+	}
+	@Override
+	public Product finbyIdProduct(int id) {
+		try {
+		      Product product = jdbcTemplate.queryForObject("SELECT * FROM dboProduct WHERE Id=?",
+		          BeanPropertyRowMapper.newInstance(Product.class), id);
+
+		      return product;
+		    } catch (IncorrectResultSizeDataAccessException e) {
+		      return null;
+		    }
 	}	
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.shop.WebShop.Repository.HomeRepository;
 import com.shop.WebShop.model.Brand;
+import com.shop.WebShop.model.Category;
 import com.shop.WebShop.model.Product;
 @Repository
 public class HomeService implements HomeRepository{
@@ -27,6 +28,11 @@ public class HomeService implements HomeRepository{
 		// TODO Auto-generated method stub
 		return jdbcTemplate.query("SELECT * from dboBrand", BeanPropertyRowMapper.newInstance(Brand.class));
 
+	}
+
+	@Override
+	public List<Category> lstCategories() {
+		return jdbcTemplate.query("Select *from dbocategory", BeanPropertyRowMapper.newInstance(Category.class));
 	}
 
 

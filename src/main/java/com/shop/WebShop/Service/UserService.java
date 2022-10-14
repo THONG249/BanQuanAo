@@ -3,7 +3,7 @@ package com.shop.WebShop.Service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -15,8 +15,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Repository;
 
 import com.shop.WebShop.Repository.UserRepository;
-import com.shop.WebShop.model.AuthenticationToken;
-import com.shop.WebShop.model.Brand;
 import com.shop.WebShop.model.User;
 
 @Repository
@@ -96,7 +94,7 @@ public User findUser(String username) {
 	@Override
 	public User getUser(String username) {
 		try {
-			String tokenString = "Select *from dboUser where username like '" + username + "' FETCH FIRST 1 ROWS ONLY";
+			String tokenString = "Select * from dboUser where username like '" + username + "' FETCH FIRST 1 ROWS ONLY";
 			User user =  jdbcTemplate.queryForObject(tokenString, BeanPropertyRowMapper.newInstance(User.class));
 			return user;
 		} catch (Exception e) {

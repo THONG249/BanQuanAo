@@ -2,18 +2,13 @@ package com.shop.WebShop.Controller;
 
 
 
-import java.util.List;
+
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,15 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shop.WebShop.Repository.LoginRepository;
 import com.shop.WebShop.Repository.TokenRepository;
 import com.shop.WebShop.Repository.UserRepository;
-import com.shop.WebShop.Service.UserService;
-//import com.shop.WebShop.Service.LogInService;
 import com.shop.WebShop.dto.ResponseSigninDto;
 import com.shop.WebShop.dto.SigninDto;
 import com.shop.WebShop.exceptions.AuthenticationFailException;
 import com.shop.WebShop.model.User;
+
 
 
 
@@ -66,8 +59,7 @@ public class LoginRegisterController {
 		//find user by user name
 		BCryptPasswordEncoder b=new BCryptPasswordEncoder();
 		
-			User user = userRepository.getUser(signdto.getUsername());
-			
+			User user = userRepository.getUser(signdto.getUsername());					
 			if(Objects.isNull(user)) {
 				throw new AuthenticationFailException("User is not valid");
 			}
@@ -78,7 +70,7 @@ public class LoginRegisterController {
 			if(tokenString == null) {
 				throw new AuthenticationFailException("Token is not present");
 			}
-			return new ResponseSigninDto("Succsess",tokenRepository.finByUsername(user));
+			return new ResponseSigninDto("Succsess",tokenRepository.finByUsername(user),user);
 					
 	
 	}

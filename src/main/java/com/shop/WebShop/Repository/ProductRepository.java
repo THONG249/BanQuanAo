@@ -7,5 +7,5 @@ public interface ProductRepository{
 
 	List<Product> products(); 
 	int create(Product product);
-
+	Product finbyIdProduct (int id);
 }
